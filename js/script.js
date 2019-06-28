@@ -45,7 +45,7 @@ $("#design").on('change',function() {
     }else{
         //<---hide all option---->
         $("#color option").hide()
-        
+
         //<---update the “Color” field to 1st-->
          $('#color option[value="tomato"]').attr('selected','true');
      
@@ -56,3 +56,19 @@ $("#design").on('change',function() {
     } 
 });
 
+//<<<<--------------Activity------------>>>>>>>>>>>>>
+
+///create an element to display the total activity cost///////
+let totalCost = 0;
+////listen for changes in the Activity section////
+$(".activities").on('change',function(){
+
+
+});
+
+///update and display total activity cost
+
+///disable conflicting activities
+
+
+///Creating an element to display the total activity cost
