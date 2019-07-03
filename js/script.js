@@ -68,9 +68,16 @@ $('.activities').append(price);
 $('[type="checkbox"]').on('change',function(e){
     const checkSelected = $(e.target);
     const insideText = checkSelected.parent().text();
+    const dollarIndex = insideText.indexOf('$');
+    const addingCost = insideText.slice(dollarIndex +1);
+    const numberCost = parseInt(addingCost);
 
     console.log(checkSelected);
     console.log(insideText);
+    console.log(dollarIndex);
+    console.log(typeof(addingCost));
+    console.log(typeof(numberCost));
+
 });
 
 ///update and display total activity cost
