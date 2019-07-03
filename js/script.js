@@ -60,10 +60,17 @@ $("#design").on('change',function() {
 
 ///create an element to display the total activity cost///////
 let totalCost = 0;
+let price;
+price = $('<label>').addClass('total').text('The total price is : $ ' + totalCost);
+$('.activities').append(price);
+
 ////listen for changes in the Activity section////
-$(".activities").on('change',function(){
+$('[type="checkbox"]').on('change',function(e){
+    const checkSelected = $(e.target);
+    const insideText = checkSelected.parent().text();
 
-
+    console.log(checkSelected);
+    console.log(insideText);
 });
 
 ///update and display total activity cost
@@ -71,4 +78,4 @@ $(".activities").on('change',function(){
 ///disable conflicting activities
 
 
-///Creating an element to display the total activity cost
+///Creating an dom element to display the total activity cost
