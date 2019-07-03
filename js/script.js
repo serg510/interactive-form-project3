@@ -70,15 +70,23 @@ $('[type="checkbox"]').on('change',function(e){
     const insideText = checkSelected.parent().text();
     const dollarIndex = insideText.indexOf('$');
     const addingCost = insideText.slice(dollarIndex +1);
-    const numberCost = parseInt(addingCost);
-
-    console.log(checkSelected);
-    console.log(insideText);
-    console.log(dollarIndex);
-    console.log(typeof(addingCost));
-    console.log(typeof(numberCost));
+    const numCost = parseInt(addingCost);
+//<-----https://stackoverflow.com/questions/11440128/jquery-test-if-checkbox-is-not-checked--->
+    if (checkSelected.is(':checked')) {
+        totalCost += numCost;
+        $('.total').text('The total price is: $' + totalCost);
+    } else {
+        totalCost -= numCost;
+        $('.total').text('The total price is: $' + totalCost);
+    }
+    // console.log(checkSelected);
+    // console.log(insideText);
+    // console.log(dollarIndex);
+    // console.log(typeof(addingCost));
+    console.log(numCost);
 
 });
+
 
 ///update and display total activity cost
 
