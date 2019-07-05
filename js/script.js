@@ -90,7 +90,7 @@ $('[type="checkbox"]').on('change',function(e){
     console.log(dateNTime);
     console.log(numCost);
 
-    //<<------Disabling conflicting activities---->>///
+    //<<------Disabling conflicting activities---->>////
     
 
 });
