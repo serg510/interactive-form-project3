@@ -71,6 +71,9 @@ $('[type="checkbox"]').on('change',function(e){
     const dollarIndex = insideText.indexOf('$');
     const addingCost = insideText.slice(dollarIndex +1);
     const numCost = parseInt(addingCost);
+    const emDashIndex = insideText.indexOf("—");
+    const comaIndex = insideText.indexOf(',');
+    const dateNTime = insideText.slice(emDashIndex +1, comaIndex);
 //<-----https://stackoverflow.com/questions/11440128/jquery-test-if-checkbox-is-not-checked--->
     if (checkSelected.is(':checked')) {
         totalCost += numCost;
@@ -81,9 +84,13 @@ $('[type="checkbox"]').on('change',function(e){
     }
     // console.log(checkSelected);
     // console.log(insideText);
-    // console.log(dollarIndex);
-    // console.log(typeof(addingCost));
+    console.log(dollarIndex);
+    console.log(emDashIndex);
+    console.log(comaIndex);
+    console.log(dateNTime);
     console.log(numCost);
+
+
 
 });
 
