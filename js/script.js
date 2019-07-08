@@ -61,7 +61,7 @@ $("#design").on('change',function() {
 ///create an element to display the total activity cost///////
 let totalCost = 0;
 let price;
-price = $('<label>').addClass('total').text('The total price is : $ ' + totalCost);
+price = $('<label>').addClass('total').text('Total: $ ' + totalCost);
 $('.activities').append(price);
 
 ////listen for changes in the Activity section////
@@ -77,10 +77,10 @@ $('[type="checkbox"]').on('change',function(e){
 //<-----https://stackoverflow.com/questions/11440128/jquery-test-if-checkbox-is-not-checked--->
     if (checkSelected.is(':checked')) {
         totalCost += numCost;
-        $('.total').text('The total price is: $' + totalCost);
+        $('.total').text('Total : $ ' + totalCost);
     } else {
         totalCost -= numCost;
-        $('.total').text('The total price is: $' + totalCost);
+        $('.total').text('Total : $ ' + totalCost);
     }
     // console.log(checkSelected);
     // console.log(insideText);
@@ -91,8 +91,13 @@ $('[type="checkbox"]').on('change',function(e){
     console.log(numCost);
 
     //<<------Disabling conflicting activities---->>////
-    
+    const checkboxes = $("input[type='checkbox']");
+    for(let i =0; i< checkboxes.length; i++){
+       const currentCheckbox = checkboxes[i];
 
+        console.log(currentCheckbox)
+    }
+    
 });
 
 
