@@ -103,10 +103,41 @@ $('[type="checkbox"]').on('change',function(e){
     
 });
 
+//<<<<<<<<<<<<-----------Payment Section--------------->>>>>>>
 
-///update and display total activity cost
+// Hide the "Select Payment Method" option
+$("#payment option[value='select_method']").hide();
 
-///disable conflicting activities
 
+//Initially, the credit card section should be selected and displayed in the form,
+$('#payment option[value="credit card"]').attr('selected','true');
 
-///Creating an dom element to display the total activity cost
+    //create variables  & set behaviour for those variables
+    const payPal = $('div p:first').addClass('payPal');
+    const bitCoin = $('div p:last').addClass('bitCoin');
+    payPal.hide();
+    bitCoin.hide();
+
+$("#payment").change(function(){
+    //focus on credit card # box
+    
+    // Get the value of the payment option selected
+    const selectedPayment =  $(this).children('option:selected').val();
+    
+    
+    if(selectedPayment  ==="credit card" ){
+        $("#credit-card").show();
+        $("#cc-num").focus();
+        
+    }else if(selectedPayment === "payPal"){
+        $("#credit-card").hide();
+        $('.payPal').show();
+        $('.bitcoin').hide();
+
+    }else if( selectedPayment === "bitCoin"){
+        creditCard.hide();
+        payPal.hide();
+        bitCoin.show();
+    }
+
+});
