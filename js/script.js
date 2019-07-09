@@ -138,6 +138,9 @@ $("#payment").change(function(){
         creditCard.hide();
         payPal.hide();
         bitCoin.show();
+    }else{
+        $("#credit-card").hide()
+
     }
 
 });
