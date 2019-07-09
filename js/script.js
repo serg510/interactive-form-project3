@@ -82,20 +82,23 @@ $('[type="checkbox"]').on('change',function(e){
         totalCost -= numCost;
         $('.total').text('Total : $ ' + totalCost);
     }
-    // console.log(checkSelected);
-    // console.log(insideText);
-    console.log(dollarIndex);
-    console.log(emDashIndex);
-    console.log(comaIndex);
-    console.log(dateNTime);
-    console.log(numCost);
+    
 
     //<<------Disabling conflicting activities---->>////
-    const checkboxes = $("input[type='checkbox']");
-    for(let i =0; i< checkboxes.length; i++){
-       const currentCheckbox = checkboxes[i];
+    const inputCheck = $("input[type='checkbox']");
+    for(let i =0; i< inputCheck.length; i++){
+        const checkboxText = inputCheck.eq(i).parent().text();
+      if(checkboxText.includes(dateNTime) && checkboxText !== insideText ){
+         if(checkSelected.is(':checked')){
+             inputCheck.eq(i).attr("disabled",true);
+             inputCheck.eq(i).parent().css("text-decoration","line-through");
+         }else{
+             inputCheck.eq(i).attr("disabled",false);
+             inputCheck.eq(i).parent().css("text-decoration","none");
+         }
 
-        console.log(currentCheckbox)
+      }
+
     }
     
 });
