@@ -116,34 +116,35 @@ $('#payment option[value="credit card"]').attr('selected','true');
 $("#payment option[value='select_method']").hide();
 
     //create variables  & set behaviour for those variables
+    const creditCard = $('div #credit-card');;
     const payPal = $('div p:first').attr('id','payPal');
     const bitCoin = $('div p:last').attr('id','bitCoin');
     payPal.hide();
     bitCoin.hide();
     // $("#credit-card").hide();
 
-$("#payment").on('change',function(e){
+$("#payment").on('change',function(){
     //focus on credit card # box
     
     // Get the value of the payment option selected
     const selectedPayment =  $(this).children('option:selected').val();
     
     
-    if(event.target.value ==="credit card" ){
-        $("#credit-card").show();
-        $("#cc-num").focus();
+    if(selectedPayment ==="credit card" ){
+            creditCard.show();
+            $("#cc-num").focus();
         
     }
-    else if(event.target.value === "payPal"){
-        $("#credit-card").hide();
-        $('#payPal').css('display','show');
-        $('#bitcoin').hide();
+    else if (selectedPayment==="paypal"){
+            creditCard.hide();
+            payPal.show();
+            bitCoin.hide();
 
     }
-    else if( event.target.value === "bitCoin"){
-        creditCard.hide();
-        payPal.hide();
-        bitCoin.show();
+    else if ( selectedPayment ==="bitcoin"){
+            creditCard.hide();
+            payPal.hide();
+            bitCoin.show();
     }
     
 
