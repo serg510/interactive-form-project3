@@ -111,18 +111,20 @@ $('[type="checkbox"]').on('change',function(e){
 
 //Initially, the credit card section should be selected and displayed in the form,
 $('#payment option[value="credit card"]').attr('selected','true');
-$("#payment option[value='select_method']").attr('disabled','disabled');
+//user shouldn’t be able to select the “Select Payment Method” option.
+// $("#payment option[value='select_method']").attr('disabled','disabled');
+$("#payment option[value='select_method']").hide();
 
     //create variables  & set behaviour for those variables
     const payPal = $('div p:first').attr('id','payPal');
     const bitCoin = $('div p:last').attr('id','bitCoin');
     payPal.hide();
     bitCoin.hide();
-    $("#credit-card").hide();
+    // $("#credit-card").hide();
 
-$("#payment").on('change',function(){
+$("#payment").on('change',function(e){
     //focus on credit card # box
-    $("#payment option[value='select_method']").hide();
+    
     // Get the value of the payment option selected
     const selectedPayment =  $(this).children('option:selected').val();
     
@@ -134,7 +136,7 @@ $("#payment").on('change',function(){
     }
     else if(event.target.value === "payPal"){
         $("#credit-card").hide();
-        $('#payPal').show();
+        $('#payPal').css('display','show');
         $('#bitcoin').hide();
 
     }
