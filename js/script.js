@@ -105,14 +105,11 @@ $('[type="checkbox"]').on('change',function(e){
 
 //<<<<<<<<<<<<-----------Payment Section--------------->>>>>>>
 
-// Hide the "Select Payment Method" option
-
-
-
 //Initially, the credit card section should be selected and displayed in the form,
 $('#payment option[value="credit card"]').attr('selected','true');
+
 //user shouldn’t be able to select the “Select Payment Method” option.
-// $("#payment option[value='select_method']").attr('disabled','disabled');
+
 $("#payment option[value='select_method']").hide();
 
     //create variables  & set behaviour for those variables
@@ -124,14 +121,14 @@ $("#payment option[value='select_method']").hide();
     // $("#credit-card").hide();
 
 $("#payment").on('change',function(){
-    //focus on credit card # box
+    
     
     // Get the value of the payment option selected
     const selectedPayment =  $(this).children('option:selected').val();
-    
-    
-    if(selectedPayment ==="credit card" ){
+    // 'If Else' statement and corresponding action
+     if(selectedPayment ==="credit card" ){
             creditCard.show();
+            //focus on credit card # box
             $("#cc-num").focus();
         
     }
@@ -146,6 +143,46 @@ $("#payment").on('change',function(){
             payPal.hide();
             bitCoin.show();
     }
-    
-
 });
+
+//<<<<<<<<---------Form Validation and Validation Messages---------->>>>>>>>
+//<<<<<<---Create a separate validation function for each of the required form fields-->>>
+
+
+function nameValidation(){
+    //created regex to exclude numbers
+    const newname = /[A-Za-z]/;
+    //takes the user input and compares it against Regex if it passes else it will display and error
+    if(newname.test($('#name').val())){
+        $('#name').prev().text("Name:").css('color', 'black');                                return true;
+
+    }else {
+        $('#name').prev().text("Please enter a valid Name.").css('color', 'red');
+        return false;
+}
+}
+$('input#name').on('blur',(event)=>{
+    nameValidation();
+});
+
+
+
+function emailValidation(){
+    const email = /^[^@]+@[^@.]+\.[a-z]+$/i;
+    if(email.test($('#mail').val())){
+        $('#mail').prev().text("Email:").css('color', 'black');                                return true;
+
+    }else {
+        $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
+        return false;
+    }
+
+};
+$('input#mail').on('blur',(event)=>{
+    emailValidation();
+});
+// function activityValidation(){};
+
+// function creditCardValidation(){};
+// function zipCodeValidation(){};
+// function cvvValidation(){};
