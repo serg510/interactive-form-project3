@@ -152,7 +152,7 @@ $("#payment").on('change',function(){
 function nameValidation(){
     //created regex to exclude numbers
     const newname = /[A-Za-z]/;
-    //takes the user input and compares it against Regex if it passes else it will display and error
+    //takes the user input and compares it against Regex if it doesnt pass else it will display and error
     if(newname.test($('#name').val())){
         $('#name').prev().text("Name:").css('color', 'black');                                return true;
 
@@ -168,7 +168,9 @@ $('input#name').on('blur',(event)=>{
 
 
 function emailValidation(){
+    //regex from workspaces for email verification
     const email = /^[^@]+@[^@.]+\.[a-z]+$/i;
+    //takes the user input and compares it against Regex if it doesnt pass else it will display and error
     if(email.test($('#mail').val())){
         $('#mail').prev().text("Email:").css('color', 'black');                                return true;
 
