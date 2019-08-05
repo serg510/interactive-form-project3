@@ -86,7 +86,7 @@ $('[type="checkbox"]').on('change',function(e){
 
     //<<------Disabling conflicting activities---->>////
     const inputCheck = $("input[type='checkbox']");
-    
+
     for(let i =0; i< inputCheck.length; i++){
         const checkboxText = inputCheck.eq(i).parent().text();
       if(checkboxText.includes(dateNTime) && checkboxText !== insideText ){
@@ -160,7 +160,7 @@ function nameValidation(){
 
     }else {
         $('#name').prev().text("Please enter a valid Name.").css('color', 'red');
-
+       
         return false;
 }
 }
@@ -180,6 +180,7 @@ function emailValidation(){
     
         }else {
             $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
+           
             return false;
         }
 };
@@ -191,32 +192,37 @@ $('input#mail').on('blur',(event)=>{
 });
 //validate activity section & adding errors
 
-let errMessage = document.createElement('p');
-    errMessage.innerHTML = "Please select at least one activity.";
-    $(".activities").append(errMessage);
-    $(".activities p").last().css("color", "red");
-    $(".activities p").last().hide();
+// let errMessage = document.createElement('p');
+//     errMessage.innerHTML = "Please select at least one activity.";
+//     $(".activities").append(errMessage);
+//     $(".activities p").last().css("color", "red");
+//     $(".activities p").last().hide();
     
-function activityValidation(){
-    let checkboxesChecked =0;
-    inputCheck.each(function(i){
-        if(inputCheck[i].checked){
-            checkboxesChecked +=1;
-        }  
-    })
-    if (checkboxesChecked === 0) {
-        $(".activities p").last().show();
-        return false;
-      }
-      else{
-        $(".activities p").last().hide();
-        return true;
-      }
-}
+// function activityValidation(){
+//     let checkboxesChecked =0;
+//     inputCheck.each(function(i){
+//         if(inputCheck[i].checked){
+//             checkboxesChecked +=1;
+//         }  
+//     })
+//     if (checkboxesChecked === 0) {
+//         $(".activities p").last().show();
+//         return false;
+//       }
+//       else{
+//         $(".activities p").last().hide();
+//         return true;
+//       }
+// }
+const errorMessageActivity = $('<label></label>').text("");
+errorMessageActivity.css('color','red');
+$('.activities').append(errorMessageActivity);
+
+$('input[type="checkbox"]').on();
 
 
 $("form").submit(function(e){
     e.preventDefault();
-    activityValidation();
+    
 
     })
