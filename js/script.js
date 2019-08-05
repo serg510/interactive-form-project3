@@ -192,33 +192,28 @@ $('input#mail').on('blur',(event)=>{
 });
 //validate activity section & adding errors
 
-// let errMessage = document.createElement('p');
-//     errMessage.innerHTML = "Please select at least one activity.";
-//     $(".activities").append(errMessage);
-//     $(".activities p").last().css("color", "red");
-//     $(".activities p").last().hide();
+let errMessage = document.createElement('p');
+    errMessage.innerHTML = "Please select at least one activity.";
+    $(".activities").append(errMessage);
+    $(".activities p").last().css("color", "red");
+    $(".activities p").last().hide();
     
-// function activityValidation(){
-//     let checkboxesChecked =0;
-//     inputCheck.each(function(i){
-//         if(inputCheck[i].checked){
-//             checkboxesChecked +=1;
-//         }  
-//     })
-//     if (checkboxesChecked === 0) {
-//         $(".activities p").last().show();
-//         return false;
-//       }
-//       else{
-//         $(".activities p").last().hide();
-//         return true;
-//       }
-// }
-const errorMessageActivity = $('<label></label>').text("");
-errorMessageActivity.css('color','red');
-$('.activities').append(errorMessageActivity);
-
-$('input[type="checkbox"]').on();
+function activityValidation(){
+    let checkboxesChecked =0;
+    inputCheck.each(function(i){
+        if(inputCheck[i].checked){
+            checkboxesChecked +=1;
+        }  
+    })
+    if (checkboxesChecked === 0) {
+        $(".activities p").last().show();
+        return false;
+      }
+      else{
+        $(".activities p").last().hide();
+        return true;
+      }
+}
 
 
 $("form").submit(function(e){
