@@ -194,25 +194,28 @@ $('input#mail').on('blur',(event)=>{
 
 let errMessage = document.createElement('p');
     errMessage.innerHTML = "Please select at least one activity.";
+    
     $(".activities").append(errMessage);
     $(".activities p").last().css("color", "red");
     $(".activities p").last().hide();
     
 function activityValidation(){
-    let checkboxesChecked =0;
-    inputCheck.each(function(i){
-        if(inputCheck[i].checked){
-            checkboxesChecked +=1;
-        }  
-    })
-    if (checkboxesChecked === 0) {
-        $(".activities p").last().show();
-        return false;
-      }
-      else{
-        $(".activities p").last().hide();
-        return true;
-      }
+    let checkboxesChecked =$('.activities input:checkbox:checked').length;
+    
+            if (checkboxesChecked === 0) {
+                $(".activities p").last().show();
+                console.log('the error message should show')
+                return false;
+
+                
+            }
+            else{
+                $(".activities p").last().hide();
+                console.log('the error message should not show')
+                return true;
+                
+
+            }
 }
 
 
