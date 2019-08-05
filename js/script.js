@@ -86,6 +86,7 @@ $('[type="checkbox"]').on('change',function(e){
 
     //<<------Disabling conflicting activities---->>////
     const inputCheck = $("input[type='checkbox']");
+    
     for(let i =0; i< inputCheck.length; i++){
         const checkboxText = inputCheck.eq(i).parent().text();
       if(checkboxText.includes(dateNTime) && checkboxText !== insideText ){
@@ -147,20 +148,23 @@ $("#payment").on('change',function(){
 
 //<<<<<<<<---------Form Validation and Validation Messages---------->>>>>>>>
 //<<<<<<---Create a separate validation function for each of the required form fields-->>>
-
+let validationErrors =0;
 
 function nameValidation(){
     //created regex to exclude numbers
     const newname = /[A-Za-z]/;
     //takes the user input and compares it against Regex if it doesnt pass else it will display and error
     if(newname.test($('#name').val())){
-        $('#name').prev().text("Name:").css('color', 'black');                                return true;
+        $('#name').prev().text("Name:").css('color', 'black');        return true;
+        
 
     }else {
         $('#name').prev().text("Please enter a valid Name.").css('color', 'red');
+
         return false;
 }
 }
+//calling the name function everytime you click in or out
 $('input#name').on('blur',(event)=>{
     nameValidation();
 });
@@ -168,23 +172,51 @@ $('input#name').on('blur',(event)=>{
 
 
 function emailValidation(){
-    //regex from workspaces for email verification
-    const email = /^[^@]+@[^@.]+\.[a-z]+$/i;
-    //takes the user input and compares it against Regex if it doesnt pass else it will display and error
-    if(email.test($('#mail').val())){
-        $('#mail').prev().text("Email:").css('color', 'black');                                return true;
-
-    }else {
-        $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
-        return false;
-    }
-
+        //regex from workspaces for email verification
+        const email = /^[^@]+@[^@.]+\.[a-z]+$/i;
+        //takes the user input and compares it against Regex if it doesnt pass else it will display and error
+        if(email.test($('#mail').val())){
+            $('#mail').prev().text("Email:").css('color', 'black');  return true;
+    
+        }else {
+            $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
+            return false;
+        }
 };
+//calling the email function everytime you click in or out
+
+
 $('input#mail').on('blur',(event)=>{
     emailValidation();
 });
-// function activityValidation(){};
+//validate activity section & adding errors
 
-// function creditCardValidation(){};
-// function zipCodeValidation(){};
-// function cvvValidation(){};
+let errMessage = document.createElement('p');
+    errMessage.innerHTML = "Please select at least one activity.";
+    $(".activities").append(errMessage);
+    $(".activities p").last().css("color", "red");
+    $(".activities p").last().hide();
+    
+function activityValidation(){
+    let checkboxesChecked =0;
+    inputCheck.each(function(i){
+        if(inputCheck[i].checked){
+            checkboxesChecked +=1;
+        }  
+    })
+    if (checkboxesChecked === 0) {
+        $(".activities p").last().show();
+        return false;
+      }
+      else{
+        $(".activities p").last().hide();
+        return true;
+      }
+}
+
+
+$("form").submit(function(e){
+    e.preventDefault();
+    activityValidation();
+
+    })
