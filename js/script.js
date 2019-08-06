@@ -190,6 +190,7 @@ function emailValidation(){
 $('input#mail').on('blur',(event)=>{
     emailValidation();
 });
+
 //validate activity section & adding errors
 
 let errMessage = document.createElement('p');
@@ -202,25 +203,23 @@ let errMessage = document.createElement('p');
 function activityValidation(){
     let checkboxesChecked =$('.activities input:checkbox:checked').length;
     
-            if (checkboxesChecked === 0) {
-                $(".activities p").last().show();
-                console.log('the error message should show')
-                return false;
-
-                
+            if (checkboxesChecked > 0) {
+                $(".activities p").last().hide();
+                //console.log('the error message should not show')
+                return true;                              
             }
             else{
-                $(".activities p").last().hide();
-                console.log('the error message should not show')
-                return true;
-                
-
+                $(".activities p").last().show();
+                //console.log('the error message should show')
+                return false;
             }
 }
+//<<<<<--------------Credit Card Validation----------->>>>>>///
+
 
 
 $("form").submit(function(e){
     e.preventDefault();
-    
+    activityValidation();
 
     })
