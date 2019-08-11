@@ -242,7 +242,7 @@ $("form").submit(function(e){
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
-        if ( $('#zip').val() == '' || !(/^\d{3}$/.test($('#zip').val()) )) {
+        if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
             $('#zip').css("border","3px solid red");
             $('#zip').attr("placeholder","*****");
         } 
