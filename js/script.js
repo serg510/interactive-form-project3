@@ -238,7 +238,7 @@ $("form").submit(function(e){
         // Checks if input field in not empty and it contains numbers between 13 and 16
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
             $('#cc-num').css("border","3px solid red");
-            $('#cc-num').attr("placeholder","Check your card again");
+            $('#cc-num').attr("placeholder","Check your card ");
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
