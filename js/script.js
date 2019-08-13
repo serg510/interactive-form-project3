@@ -213,27 +213,16 @@ function activityValidation(){
                 return false;
             }
 }
-//<<<<<--------------Credit Card Validation----------->>>>>>///
-
-//added placeholders
-//added a red bottom
-// $('#payment').on('change',function(e){
-//     // Code taken from: https://stackoverflow.com/questions/36476703/jquery-click-select-option-value-with-option-text
-//     let payMethond = $('option:selected', this).text();
-//     if(payMethond== 'Credit Card'){
-        
-     
-
-// })
 
 
 $("form").submit(function(e){
     
     activityValidation();
     
-        
+        //<<<<<--------------Credit Card Validation----------->>>>>>///
+ 
     // Checks if payment option is credit card
-    if ($('#payment option[value = "credit card"]').text() === 'Credit Card') {
+    if ($('#payment option[value = "credit card"]').text() == 'Credit Card') {
         // Checks if input field in not empty and it contains numbers between 13 and 16
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
             e.preventDefault();
@@ -242,13 +231,13 @@ $("form").submit(function(e){
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
-        else if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
+         if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
             e.preventDefault();
             $('#zip').css("border","3px solid red");
             $('#zip').attr("placeholder","*****");
         } 
         // Checks if input field in not empty and it contains 3 numbers
-        else if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
+         if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
             e.preventDefault();
             $('#cvv').css("border","3px solid red");
             $('#cvv').attr("placeholder","***");
