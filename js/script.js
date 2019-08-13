@@ -24,14 +24,14 @@ $("#title").on('change', function() {
 $("#design option:selected").text('');
 
 //target the first option of a drop down menu
-$("#color option:first").before("<option selected='selected'>Please select a T-shirt theme</option>");
+//$("#color option:first").before("<option selected='selected'>Please select a T-shirt theme</option>");
 //hide color until theme is selected
-$("#color option").hide()
+$("#colors-js-puns").hide()
 //show corresponding colors for themes selected
 $("#design").on('change',function() {
     if ($("#design").val()==="js puns"){
       //  $("#color option:contains('JS Puns')").show();
-
+      $("#colors-js-puns").show()
        //<---hide all option---->
        $("#color option").hide()
        //<---update the “Color” field to 1st-->
@@ -44,6 +44,7 @@ $("#design").on('change',function() {
        
     }else{
         //<---hide all option---->
+        $("#colors-js-puns").show()
         $("#color option").hide()
 
         //<---update the “Color” field to 1st-->
@@ -155,9 +156,9 @@ function nameValidation(){
     const newname = /[A-Za-z]/;
     //takes the user input and compares it against Regex if it doesnt pass else it will display and error
     if(newname.test($('#name').val())){
-        $('#name').prev().text("Name:").css('color', 'black');        return true;
+        $('#name').prev().text("Name:").css('color', 'black'); 
+          return true;
         
-
     }else {
         $('#name').prev().text("Please enter a valid Name.").css('color', 'red');
        
@@ -176,12 +177,10 @@ function emailValidation(){
         const email = /^[^@]+@[^@.]+\.[a-z]+$/i;
         //takes the user input and compares it against Regex if it doesnt pass else it will display and error
         if(email.test($('#mail').val())){
-            $('#mail').prev().text("Email:").css('color', 'black');  return true;
-    
-        }else {
-            $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
-           
-            return false;
+            $('#mail').prev().text("Email:").css('color', 'black');
+             return true;
+            }else {
+            $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');          return false;
         }
 };
 //calling the email function everytime you click in or out
@@ -229,7 +228,7 @@ function activityValidation(){
 
 
 $("form").submit(function(e){
-    e.preventDefault();
+    
     activityValidation();
     
         
@@ -237,21 +236,31 @@ $("form").submit(function(e){
     if ($('#payment option[value = "credit card"]').text() == 'Credit Card') {
         // Checks if input field in not empty and it contains numbers between 13 and 16
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
+            e.preventDefault();
             $('#cc-num').css("border","3px solid red");
             $('#cc-num').attr("placeholder","Check your card ");
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
         if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
+            e.preventDefault();
             $('#zip').css("border","3px solid red");
             $('#zip').attr("placeholder","*****");
         } 
         // Checks if input field in not empty and it contains 3 numbers
         if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
+            e.preventDefault();
             $('#cvv').css("border","3px solid red");
             $('#cvv').attr("placeholder","***");
         }
-
+        
+            
+        }else{
+            // check the status of name validation and email validation
+        if(nameValidation || emailValidation  !== true ){
+            e.preventDefault(); 
+        }
+        }
     }
 
-    })
+)
