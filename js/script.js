@@ -227,7 +227,7 @@ $("form").submit(function(e){
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
             e.preventDefault();
             $('#cc-num').css("border","3px solid red");
-            $('#cc-num').attr("placeholder","Check your card ");
+            $('#cc-num').attr("placeholder","Please enter a credit card number");
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
@@ -246,7 +246,7 @@ $("form").submit(function(e){
             
         }else{
             // check the status of name validation and email validation
-        if(nameValidation || emailValidation || activityValidation !== true ){
+        if( !nameValidation() || !emailValidation() || !activityValidation()){
             e.preventDefault(); 
         }
         }
