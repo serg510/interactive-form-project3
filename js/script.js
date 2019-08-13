@@ -233,7 +233,7 @@ $("form").submit(function(e){
     
         
     // Checks if payment option is credit card
-    if ($('#payment option[value = "credit card"]').text() == 'Credit Card') {
+    if ($('#payment option[value = "credit card"]').text() === 'Credit Card') {
         // Checks if input field in not empty and it contains numbers between 13 and 16
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
             e.preventDefault();
@@ -242,13 +242,13 @@ $("form").submit(function(e){
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
-        if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
+        else if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
             e.preventDefault();
             $('#zip').css("border","3px solid red");
             $('#zip').attr("placeholder","*****");
         } 
         // Checks if input field in not empty and it contains 3 numbers
-        if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
+        else if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
             e.preventDefault();
             $('#cvv').css("border","3px solid red");
             $('#cvv').attr("placeholder","***");
@@ -257,7 +257,7 @@ $("form").submit(function(e){
             
         }else{
             // check the status of name validation and email validation
-        if(nameValidation || emailValidation  !== true ){
+        if(nameValidation || emailValidation || activityValidation !== true ){
             e.preventDefault(); 
         }
         }
