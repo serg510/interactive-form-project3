@@ -162,10 +162,16 @@ function nameValidation(newname){
 }
 }
 
-  
-$('input#name').on('keypress blur', function(event) {
+  //run on blur
+$('input#name').on('blur', function(event) {
     nameValidation(event.target.value);
   });
+
+  // run on click 
+  $('form').submit(function() {
+    nameValidation();
+  });
+
 
 function emailValidation(){
         //regex from workspaces for email verification
