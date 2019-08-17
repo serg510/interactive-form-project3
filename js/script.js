@@ -21,39 +21,37 @@ $("#title").on('change', function() {
 //hide the select theme option 
 // <---code from
 //(https://stackoverflow.com/questions/1643227/get-selected-text-from-a-drop-down-list-select-box-using-jquery)----->
-$("#design option:selected").text('');
+$("#design option:selected").text('Select Theme');
 
 //target the first option of a drop down menu
-//$("#color option:first").before("<option selected='selected'>Please select a T-shirt theme</option>");
-//hide color until theme is selected
+$("#color option:first").before("<option selected='selected'>Please select a T-shirt theme</option>");
+
 $("#colors-js-puns").hide()
+
 //show corresponding colors for themes selected
 $("#design").on('change',function() {
     if ($("#design").val()==="js puns"){
-      //  $("#color option:contains('JS Puns')").show();
-      $("#colors-js-puns").show()
+        $("#design option:first").text('Select Theme').hide();
+        $("#colors-js-puns option[value='cornflowerblue']").show().prop('selected', true);
+        $("#colors-js-puns").show()
        //<---hide all option---->
-       $("#color option").hide()
-       //<---update the “Color” field to 1st-->
-       $('#color option[value="cornflowerblue"]').attr('selected','true');
-    
-       //show only the 'Js puns'//
-       $('#color option[value="cornflowerblue"]').show();
-       $('#color option[value="darkslategrey"]').show();
-       $('#color option[value="gold"]').show();
+        $("#color option").hide()
+        //show only the 'Js puns'//
+        $('#color option[value="cornflowerblue"]').show();
+        $('#color option[value="darkslategrey"]').show();
+        $('#color option[value="gold"]').show();
+        
        
     }else{
         //<---hide all option---->
+        $("#colors-js-puns option[value='tomato']").show().prop('selected', true);
         $("#colors-js-puns").show()
         $("#color option").hide()
-
-        //<---update the “Color” field to 1st-->
-         $('#color option[value="tomato"]').attr('selected','true');
-     
          //show only the 'I love Js' //
         $('#color option[value="tomato"]').show();
         $('#color option[value="steelblue"]').show();
         $('#color option[value="dimgrey"]').show();
+       
     } 
 });
 
@@ -147,15 +145,13 @@ $("#payment").on('change',function(){
     }
 });
 
-//<<<<<<<<---------Form Validation and Validation Messages---------->>>>>>>>
+//<<<<<<<<---------Form Validation and Error Messages---------->>>>>>>>
 //<<<<<<---Create a separate validation function for each of the required form fields-->>>
-let validationErrors =0;
 
-function nameValidation(){
-    //created regex to exclude numbers
-    const newname = /[A-Za-z]/;
+
+function nameValidation(newname){
     //takes the user input and compares it against Regex if it doesnt pass else it will display and error
-    if(newname.test($('#name').val())){
+    if(newname !== ''){
         $('#name').prev().text("Name:").css('color', 'black'); 
           return true;
         
@@ -165,12 +161,11 @@ function nameValidation(){
         return false;
 }
 }
-//calling the name function everytime you click in or out
-$('input#name').on('blur',(event)=>{
-    nameValidation();
-});
 
-
+  
+$('input#name').on('keypress blur', function(event) {
+    nameValidation(event.target.value);
+  });
 
 function emailValidation(){
         //regex from workspaces for email verification
@@ -178,17 +173,24 @@ function emailValidation(){
         //takes the user input and compares it against Regex if it doesnt pass else it will display and error
         if(email.test($('#mail').val())){
             $('#mail').prev().text("Email:").css('color', 'black');
+           
              return true;
+             
             }else {
-            $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');          return false;
+            $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
+            
+            return false;
         }
 };
+
+
 //calling the email function everytime you click in or out
 
 
-$('input#mail').on('blur',(event)=>{
-    emailValidation();
-});
+
+$('input#mail').on('keypress blur', function(event) {
+    emailValidation(event.target.value);
+  });
 
 //validate activity section & adding errors
 
@@ -200,16 +202,16 @@ let errMessage = document.createElement('p');
     $(".activities p").last().hide();
     
 function activityValidation(){
-    let checkboxesChecked =$('.activities input:checkbox:checked').length;
     
-            if (checkboxesChecked > 0) {
+    
+            if (totalCost !== 0) {
                 $(".activities p").last().hide();
-                //console.log('the error message should not show')
+               //console.log('the error message should not show')
                 return true;                              
             }
             else{
                 $(".activities p").last().show();
-                //console.log('the error message should show')
+               //console.log('the error message should show')
                 return false;
             }
 }
@@ -217,38 +219,38 @@ function activityValidation(){
 
 $("form").submit(function(e){
     
-    activityValidation();
+     activityValidation();
+       // check the status of name validation and email validation
+       if( !nameValidation() || !emailValidation() || !activityValidation()){
+        e.preventDefault(); 
+    }
     
+
         //<<<<<--------------Credit Card Validation----------->>>>>>///
  
     // Checks if payment option is credit card
-    if ($('#payment option[value = "credit card"]').text() == 'Credit Card') {
+    if ($('#payment option[value = "credit card"]').is(':selected')) {
         // Checks if input field in not empty and it contains numbers between 13 and 16
         if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
             e.preventDefault();
             $('#cc-num').css("border","3px solid red");
-            $('#cc-num').attr("placeholder","Please enter a credit card number");
+            $('#cc-num').attr("placeholder","Number Must Be 13-16 Digits");
 
         } 
         // Checks if input field in not empty and it contains 5 numbers
          if ( $('#zip').val() == '' || !(/^\d{5}$/.test($('#zip').val()) )) {
             e.preventDefault();
             $('#zip').css("border","3px solid red");
-            $('#zip').attr("placeholder","*****");
+            $('#zip').attr("placeholder","Zip is 5 Digits");
         } 
         // Checks if input field in not empty and it contains 3 numbers
          if ($('#cvv').val() == '' || !(/^\d{3}$/.test($('#cvv').val())) ) {
             e.preventDefault();
             $('#cvv').css("border","3px solid red");
-            $('#cvv').attr("placeholder","***");
+            $('#cvv').attr("placeholder","CVV 3 Digits");
         }
         
             
-        }else{
-            // check the status of name validation and email validation
-        if( !nameValidation() || !emailValidation() || !activityValidation()){
-            e.preventDefault(); 
-        }
         }
     }
 
