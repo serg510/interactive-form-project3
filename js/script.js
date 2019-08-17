@@ -163,7 +163,7 @@ function nameValidation(newname){
 }
 
   //run on blur
-$('input#name').on('blur', function(event) {
+$('input#name').on('blur mouseout', function(event) {
     nameValidation(event.target.value);
   });
 
