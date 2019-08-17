@@ -167,10 +167,7 @@ $('input#name').on('blur', function(event) {
     nameValidation(event.target.value);
   });
 
-  // run on click 
-  $('form').submit(function() {
-    nameValidation();
-  });
+ 
 
 
 function emailValidation(){
