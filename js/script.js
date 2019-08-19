@@ -236,8 +236,8 @@ $("form").submit(function(e){
     // Checks if payment option is credit card
     if ($('#payment option[value = "credit card"]').is(':selected')) {
         // Checks if input field in not empty and it contains numbers between 13 and 16
-        if ( $('#cc-num').val() == '' ||  !(/\d{13,16}$/.test($('#cc-num').val())) ) {
-            e.preventDefault();
+        if ( $('#cc-num').val() == '' ||  !(/^\d{13,16}$/.test($('#cc-num').val())) ) {
+            e.preventDefault();             
             $('#cc-num').css("border","3px solid red");
             $('#cc-num').attr("placeholder","Number Must Be 13-16 Digits");
 
