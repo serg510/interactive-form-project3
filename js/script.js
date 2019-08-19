@@ -149,8 +149,9 @@ $("#payment").on('change',function(){
 //<<<<<<---Create a separate validation function for each of the required form fields-->>>
 
 
-function nameValidation(newname){
+function nameValidation(){
     //takes the user input and compares it against Regex if it doesnt pass else it will display and error
+    let newname = $('#name').val();
     if(newname !== ''){
         $('#name').prev().text("Name:").css('color', 'black'); 
           return true;
@@ -163,7 +164,7 @@ function nameValidation(newname){
 }
 
   //run on blur
-$('input#name').on('blur mouseout', function(event) {
+$('input#name').on('blur', function(event) {
     nameValidation(event.target.value);
   });
 
@@ -221,7 +222,8 @@ function activityValidation(){
 
 
 $("form").submit(function(e){
-    
+     nameValidation();
+     emailValidation();
      activityValidation();
        // check the status of name validation and email validation
        if( !nameValidation() || !emailValidation() || !activityValidation()){
@@ -234,7 +236,7 @@ $("form").submit(function(e){
     // Checks if payment option is credit card
     if ($('#payment option[value = "credit card"]').is(':selected')) {
         // Checks if input field in not empty and it contains numbers between 13 and 16
-        if ( $('#cc-num').val() == '' ||  !(/\d{13,16}/.test($('#cc-num').val())) ) {
+        if ( $('#cc-num').val() == '' ||  !(/\d{13,16}$/.test($('#cc-num').val())) ) {
             e.preventDefault();
             $('#cc-num').css("border","3px solid red");
             $('#cc-num').attr("placeholder","Number Must Be 13-16 Digits");
